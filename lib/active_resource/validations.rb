@@ -35,19 +35,20 @@ module ActiveResource
     def from_hash(messages, save_cache = false)
       clear unless save_cache
 
-      messages.each do |(key, errors)|
-        errors.each do |error|
-          if @base.known_attributes.include?(key)
-            add key, error
-          elsif key == "base"
-            self[:base] << error
-          else
-            # reporting an error on an attribute not in attributes
-            # format and add them to base
-            self[:base] << "#{key.humanize} #{error}"
-          end
-        end
-      end
+      self[:base] << messages
+#       messages.each do |(key, errors)|
+#         errors.each do |error|
+#           if @base.known_attributes.include?(key)
+#             add key, error
+#           elsif key == "base"
+#             self[:base] << error
+#           else
+#             # reporting an error on an attribute not in attributes
+#             # format and add them to base
+#             self[:base] << "#{key.humanize} #{error}"
+#           end
+#         end
+#       end
     end
 
     # Grabs errors from a json response.
