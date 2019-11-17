@@ -53,8 +53,8 @@ module ActiveResource
     # Grabs errors from a json response.
     def from_json(json, save_cache = false)
       decoded = ActiveSupport::JSON.decode(json) || {} rescue {}
-      if decoded.kind_of?(Hash) && (decoded.has_key?("errors") || decoded.empty?)
-        errors = decoded["errors"] || {}
+      if decoded.kind_of?(Hash) && (decoded.has_key?("message") || decoded.empty?)
+        errors = decoded["message"] || {}
         if errors.kind_of?(Array)
           # 3.2.1-style with array of strings
           ActiveSupport::Deprecation.warn("Returning errors as an array of strings is deprecated.")
